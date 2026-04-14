@@ -1,45 +1,65 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Student Dashboard</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <header>
-        <nav>
-            <h1>Student Dashboard</h1>
-            <!-- TODO: add a login/logout section here -->
-        </nav>
+      <nav>
+        <h1>Student Dashboard</h1>
+        <!-- TODO: add a login/logout section here -->
+        <button class="hidden" id="logout-btn" onclick="logout()">Logout</button>
+      </nav>
     </header>
 
     <main>
-        <!-- Login form (shown when not logged in) -->
-        <section id="login-section">
-            <h2>Login</h2>
-            <form id="login-form">
-                <!-- TODO: add username and password inputs + submit button -->
-            </form>
-        </section>
+      <!-- Login form (shown when not logged in) -->
+      <section id="login-section">
+        <h2>Login</h2>
+        <form id="login-form" method="POST">
+          <!-- TODO: add username and password inputs + submit button -->
+          <label for="username">Username</label>
+          <input type="text" name="username" />
 
-        <!-- Dashboard (shown after login) -->
-        <section id="dashboard" class="hidden">
-            <h2>Students</h2>
+          <label for="password">Password</label>
+          <input type="password" name="password" />
 
-            <!-- TODO: add a form to create a new student -->
+          <button type="submit">Login</button>
+        </form>
+      </section>
 
-            <!-- Student list (populated by JavaScript) -->
-            <div id="student-list" class="card-grid">
-                <!-- Cards will be added here by app.js -->
-            </div>
-        </section>
+      <!-- Dashboard (shown after login) -->
+      <section id="dashboard-section" class="hidden">
+        <h2>Students</h2>
+
+        <!-- TODO: add a form to create a new student -->
+        <form id="new-student-form" method="POST">
+          <label for="_name">Name</label>
+          <input type="text" name="name" />
+
+          <label for="email">Email</label>
+          <input type="email" name="email" />
+
+          <label for="grade">Grade</label>
+          <input type="text" name="grade" />
+
+          <button type="submit">New Student</button>
+        </form>
+
+        <!-- Student list (populated by JavaScript) -->
+        <div id="student-list" class="card-grid">
+          <!-- Cards will be added here by app.js -->
+        </div>
+      </section>
     </main>
 
     <footer>
-        <p>&copy; 2026 Student Platform</p>
+      <p>&copy; 2026 Student Platform</p>
     </footer>
 
     <script src="app.js"></script>
-</body>
+  </body>
 </html>
