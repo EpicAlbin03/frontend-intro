@@ -1,42 +1,189 @@
 /* ═══ Reset ═══ */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 /* ═══ Base ═══ */
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-    background-color: #f5f7fa;
-    color: #333;
-    line-height: 1.6;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  background-color: #f5f7fa;
+  color: #333;
+  line-height: 1.6;
 }
 
 /* ═══ Header & Nav ═══ */
-/* TODO: style the header and nav using flexbox */
+header {
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+nav {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 18px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+nav h1 {
+  font-size: 1.5rem;
+  color: #0f172a;
+}
 
 /* ═══ Main Content ═══ */
 main {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 30px;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 30px;
+}
+
+section + section {
+  margin-top: 24px;
+}
+
+h2 {
+  margin-bottom: 18px;
+  color: #0f172a;
 }
 
 /* ═══ Cards ═══ */
-/* TODO: style the card class (background, padding, border-radius, shadow) */
+.card {
+  background: #ffffff;
+  padding: 20px;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.06);
+}
 
 /* ═══ Card Grid ═══ */
-/* TODO: make .card-grid a flex container with wrapping and gap */
+.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 24px;
+}
+
+.card-grid > * {
+  flex: 1 1 260px;
+}
 
 /* ═══ Forms ═══ */
-/* TODO: style form inputs, labels, and buttons */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 24px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+}
+
+label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+input {
+  width: 100%;
+  padding: 10px 14px;
+  font: inherit;
+  color: #0f172a;
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+input::placeholder {
+  color: #94a3b8;
+}
+
+input:hover {
+  background: #f8fafc;
+}
+
+input:focus {
+  border-color: #0f172a;
+  box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.12);
+}
+
+button {
+  align-self: flex-start;
+  padding: 10px 16px;
+  font: inherit;
+  font-weight: 600;
+  color: #f8fafc;
+  background: #111827;
+  border: 1px solid #111827;
+  border-radius: 8px;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+button:hover {
+  background: #1f2937;
+  border-color: #1f2937;
+}
+
+button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.18);
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+footer {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 30px 30px;
+  color: #64748b;
+}
 
 /* ═══ Hidden class ═══ */
 .hidden {
-    display: none;
+  display: none;
 }
 
 /* ═══ Responsive ═══ */
-/* TODO: add a media query for screens smaller than 768px */
-/* Make the card grid stack vertically on mobile */
+@media (max-width: 768px) {
+  nav,
+  main,
+  footer {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  nav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .card-grid {
+    flex-direction: column;
+  }
+
+  .card-grid > * {
+    flex-basis: auto;
+  }
+
+  button {
+    width: 100%;
+  }
+}

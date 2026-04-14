@@ -110,7 +110,7 @@ function renderStudents(students) {
   for (const student of students) {
     const studentEl = document.createElement("div")
     studentEl.classList.add("card")
-    studentEl.innerHTML = `Name: ${student.name}, Email: ${student.email}, Grade: ${student.grade}`
+    studentEl.innerHTML = `<b>Name:</b> ${student.name} <br/> <b>Email:</b> ${student.email} <br/> <b>Grade:</b> ${student.grade}`
     const studentListEl = document.getElementById("student-list")
     studentListEl.appendChild(studentEl)
   }
