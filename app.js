@@ -48,6 +48,11 @@ async function login(username, password) {
     }),
   })
 
+  if (!res.ok) {
+    console.log("Failed to login")
+    return
+  }
+
   const token = await res.json()
   localStorage.setItem("access_token", token.access)
   return true
@@ -79,6 +84,16 @@ async function loadStudents() {
       Authorization: `Bearer ${token}`,
     },
   })
+
+  if (res.status === 403) {
+    logout()
+    return
+  }
+
+  if (!res.ok) {
+    console.log("Failed to load students")
+    return
+  }
 
   const students = await res.json()
   renderStudents(students)
@@ -123,6 +138,11 @@ async function createStudent(name, email, grade, courseId) {
       course: courseId,
     }),
   })
+
+  if (!res.ok) {
+    console.log("Failed to create student")
+    return
+  }
 
   const user = await res.json()
   await loadStudents(user)
