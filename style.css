@@ -90,7 +90,8 @@ label {
   color: #334155;
 }
 
-input {
+input,
+select {
   width: 100%;
   padding: 10px 14px;
   font: inherit;
@@ -109,11 +110,13 @@ input::placeholder {
   color: #94a3b8;
 }
 
-input:hover {
+input:hover,
+select:hover {
   background: #f8fafc;
 }
 
-input:focus {
+input:focus,
+select:focus {
   border-color: #0f172a;
   box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.12);
 }

@@ -19,7 +19,7 @@ loginFormEl.addEventListener("submit", async (e) => {
   const password = loginFormEl.querySelector('input[name="password"]').value
   const success = await login(username, password)
   if (success) {
-    showLoginSection(false)
+    await showLoginSection(false)
     await loadStudents()
   }
 })
@@ -30,7 +30,8 @@ newStudentFormEl.addEventListener("submit", async (e) => {
   const name = newStudentFormEl.querySelector('input[name="name"]').value
   const email = newStudentFormEl.querySelector('input[name="email"]').value
   const grade = newStudentFormEl.querySelector('input[name="grade"]').value
-  await createStudent(name, email, grade, 1)
+  const course = newStudentFormEl.querySelector('select[name="course"]').value
+  await createStudent(name, email, grade, course)
 })
 
 async function login(username, password) {
@@ -62,11 +63,11 @@ function getToken() {
   return localStorage.getItem("access_token")
 }
 
-function logout() {
+async function logout() {
   localStorage.removeItem("access_token")
   localStorage.removeItem("refresh_token")
   // TODO: hide dashboard, show login section
-  showLoginSection(true)
+  await showLoginSection(true)
 }
 
 // ═══ Load Students ═══
@@ -86,6 +87,7 @@ async function loadStudents() {
   })
 
   if (res.status === 403) {
+    console.log("Unauthorized (token expired)")
     logout()
     return
   }
@@ -103,16 +105,49 @@ function renderStudents(students) {
   const list = document.querySelector("#student-list")
   list.innerHTML = ""
 
-  // TODO: loop through students
-  // For each student, create a div with class "card"
-  // Set its innerHTML to show the student's name, email, and grade
-  // Append it to the list
   for (const student of students) {
     const studentEl = document.createElement("div")
     studentEl.classList.add("card")
     studentEl.innerHTML = `<b>Name:</b> ${student.name} <br/> <b>Email:</b> ${student.email} <br/> <b>Grade:</b> ${student.grade}`
     const studentListEl = document.getElementById("student-list")
     studentListEl.appendChild(studentEl)
+  }
+}
+
+// ═══ Load Courses ═══
+async function loadSelectCourses() {
+  const token = getToken()
+
+  const res = await fetch(`${API_URL}/courses/`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  })
+
+  if (res.status === 403) {
+    console.log("Unauthorized (token expired)")
+    logout()
+    return
+  }
+
+  if (!res.ok) {
+    console.log("Failed to load courses")
+    return
+  }
+
+  const courses = await res.json()
+  renderSelectCourses(courses)
+}
+
+function renderSelectCourses(courses) {
+  const courseSelectEl = newStudentFormEl.querySelector('select[name="course"]')
+
+  for (const course of courses) {
+    const courseEl = document.createElement("option")
+    courseEl.value = course.id
+    courseEl.textContent = course.name
+    courseSelectEl.appendChild(courseEl)
   }
 }
 
@@ -156,14 +191,14 @@ async function createStudent(name, email, grade, courseId) {
 ;(async function main() {
   const token = getToken()
   if (token) {
-    showLoginSection(false)
+    await showLoginSection(false)
     await loadStudents()
   } else {
-    showLoginSection(true)
+    await showLoginSection(true)
   }
 })()
 
-function showLoginSection(showLogin) {
+async function showLoginSection(showLogin) {
   const dashboardSection = document.getElementById("dashboard-section")
   const loginSection = document.getElementById("login-section")
   const logoutBtn = document.getElementById("logout-btn")
@@ -175,5 +210,6 @@ function showLoginSection(showLogin) {
     dashboardSection.classList.remove("hidden")
     loginSection.classList.add("hidden")
     logoutBtn.classList.remove("hidden")
+    await loadSelectCourses()
   }
 }
