@@ -51,7 +51,7 @@ async function login(username, password) {
 
   if (!res.ok) {
     console.log("Failed to login")
-    return
+    return false
   }
 
   const token = await res.json()
@@ -142,6 +142,7 @@ async function loadSelectCourses() {
 
 function renderSelectCourses(courses) {
   const courseSelectEl = newStudentFormEl.querySelector('select[name="course"]')
+  courseSelectEl.innerHTML = ""
 
   for (const course of courses) {
     const courseEl = document.createElement("option")
