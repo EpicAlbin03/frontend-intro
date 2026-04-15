@@ -11,6 +11,7 @@ This is the exact pattern Vue.js uses under the hood. Tomorrow, you'll rebuild t
 ## Prerequisites
 
 Your Django backend must be running (locally or in Docker) with:
+
 - The REST API at /api/students/ and /api/courses/
 - JWT auth at /api/token/
 - CORS enabled for localhost
@@ -19,11 +20,11 @@ Your Django backend must be running (locally or in Docker) with:
 
 ## Files Provided
 
-| File | What to do |
-|---|---|
-| `index.html` | Structure is started — fill in the TODOs |
-| `style.css` | Some basics done — add styling for cards, grid, forms, responsive |
-| `app.js` | Functions are outlined — implement the logic |
+| File         | What to do                                                        |
+| ------------ | ----------------------------------------------------------------- |
+| `index.html` | Structure is started — fill in the TODOs                          |
+| `style.css`  | Some basics done — add styling for cards, grid, forms, responsive |
+| `app.js`     | Functions are outlined — implement the logic                      |
 
 Open `index.html` directly in your browser (File > Open or double-click). No server needed for the frontend — it's just static files.
 
@@ -32,11 +33,13 @@ Open `index.html` directly in your browser (File > Open or double-click). No ser
 ## Requirements
 
 ### HTML
+
 - Login form with username and password inputs
 - A section for the student list (card grid)
 - A form to add a new student (name, email, grade, course)
 
 ### CSS
+
 - Styled nav bar with flexbox
 - Card styling (white background, padding, border-radius, shadow)
 - Card grid using flexbox with wrapping
@@ -45,6 +48,7 @@ Open `index.html` directly in your browser (File > Open or double-click). No ser
 - A .hidden class that hides elements (display: none)
 
 ### JavaScript
+
 - Login: POST to /api/token/, store the JWT token in localStorage
 - Load students: GET /api/students/ with Authorization header, render as cards
 - Create student: POST to /api/students/ with form data, refresh the list
@@ -81,4 +85,4 @@ git commit -m "Session 8: Standalone student dashboard with HTML, CSS, JS"
 git push
 ```
 
-**Next session**: Vue.js — rebuild this dashboard with components, reactivity, and modern tooling.
+**Next session**: Vue.js — rebuild this dashboard with components, reactivity, and modern tooling
